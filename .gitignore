@@ -1,0 +1,25 @@
+# 忽略编译生成的文件
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+
+# 忽略 CMake 生成的文件
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+out/
+
+# 忽略 VSCode 相关的配置
+.vscode/
+.vs
+
+# 忽略 CLion 相关的配置
+.idea/
+
+# 忽略日志和临时文件
+*.log
+*.tmp
