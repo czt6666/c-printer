@@ -1,0 +1,10 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+        "LPWSTR",
+        "LPSTR",
+        // 可以添加更多 Windows API 相关的类型别名
+        "PRINTER_INFO_2"
+    ]
+}
