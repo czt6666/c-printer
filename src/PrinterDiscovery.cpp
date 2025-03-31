@@ -6,6 +6,8 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <winspool.h>
+#define UNICODE
+#define _UNICODE
 #elif defined(__linux__) || defined(__APPLE__)
 #include <cups/cups.h>
 #endif

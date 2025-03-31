@@ -2,6 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include <cstdlib> // 用于调用外部工具
+// libreoffice
 
 #ifdef _WIN32
 #define SYSTEM_CONVERT_COMMAND "soffice --headless --convert-to pdf"
