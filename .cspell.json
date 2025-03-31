@@ -5,6 +5,15 @@
         "LPWSTR",
         "LPSTR",
         "soffice",
+        "PDFCONVERTER",
+        "PRINTERMANAGER",
+        "lwinspool",
+        "winspool",
+        "lwinspool",
+        "lwinspool",
+        "lwinspool",
+        "lwinspool",
+        "lwinspool",
         // 可以添加更多 Windows API 相关的类型别名
         "PRINTER_INFO_2"
     ]
