@@ -1,5 +1,5 @@
 // PrinterDiscovery.cpp
-// 显式使用Unicode版本的API（例：EnumPrintersW），确保结构体中的字符串是宽字符类型
+// cSpell:disable
 #include "PrinterDiscovery.h"
 #include <iostream>
 
@@ -8,6 +8,7 @@
 #include <winspool.h>
 #define UNICODE
 #define _UNICODE
+
 #elif defined(__linux__) || defined(__APPLE__)
 #include <cups/cups.h>
 #endif
@@ -18,7 +19,6 @@ std::string WideCharToString(const LPCWSTR wstr)
     if (!wstr)
         return "";
 
-    // 获取所需缓冲区大小
     int size_needed = WideCharToMultiByte(
         CP_UTF8, 0,
         wstr, -1,
@@ -48,7 +48,7 @@ std::vector<std::string> PrinterDiscovery::listPrinters()
     DWORD needed = 0, returned = 0;
 
     // 第一次调用获取所需缓冲区大小
-    EnumPrintersW(
+    EnumPrinters(
         PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS,
         nullptr,
         2,
@@ -63,7 +63,7 @@ std::vector<std::string> PrinterDiscovery::listPrinters()
     BYTE *buffer = new BYTE[needed];
 
     // 第二次调用获取实际数据
-    if (EnumPrintersW(
+    if (EnumPrinters(
             PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS,
             nullptr,
             2,
@@ -167,3 +167,5 @@ int main()
 
     return 0;
 }
+
+// g++ PrinterDiscovery2.cpp -o pd.exe -I../include -lwinspool

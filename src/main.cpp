@@ -1,3 +1,4 @@
+// cSpell:disable
 #include "PrinterDiscovery.h"
 #include "../include/OSAdapter.h"
 #include "PrintJobHandler.h"
@@ -35,3 +36,5 @@ int main()
 // windows
 // g++ -o printer_app main.cpp PrinterDiscovery.cpp PrinterManager.cpp FileConverter.cpp PrintJobHandler.cpp OSAdapter.cpp -lwinspool
 // printer_app.exe
+
+// g++ -I../include -lwinspool -windows main.cpp
