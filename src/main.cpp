@@ -1,5 +1,5 @@
 #include "PrinterDiscovery.h"
-#include "OSAdapter.h"
+#include "../include/OSAdapter.h"
 #include "PrintJobHandler.h"
 #include <string>
 #include <iostream>
