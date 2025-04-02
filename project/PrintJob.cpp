@@ -23,7 +23,9 @@ bool PrintJob::sendToPrinter()
 {
     std::string command;
 #ifdef _WIN32
-    command = "start /B \"\" \"" + pdfFilePath + "\"";
+    // print /d:"Hewlett-Packard HP LaserJet 500 color M551" "D:/C/printer/files/test-e11bda1226f08065.pdf"
+    // start microsoft-edge:https://localhost/print?file="D:/C/printer/files/test-e11bda1226f08065.pdf"
+    command = "rundll32.exe printui.dll,PrintUIEntry /c /n \"" + selectedPrinter + "\" /pt /f \"" + pdfFilePath + "\"";
 #elif defined(__linux__) || defined(__APPLE__)
     command = "lp -d \"" + selectedPrinter + "\" \"" + pdfFilePath + "\"";
 #endif
@@ -36,3 +38,8 @@ bool PrintJob::monitorPrintStatus()
     std::cout << "Print status monitoring is not fully implemented yet. Assume success for now." << std::endl;
     return true;
 }
+
+// $printerName = "Hewlett-Packard HP LaserJet 500 color M551"
+// $pdfPath = "D:/C/printer/files/test-e11bda1226f08065.pdf"
+// Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Windows" -Name "Device" -Value "\$printerName,winspool,Ne00:"
+// Start-Process -FilePath \$pdfPath -Verb Print

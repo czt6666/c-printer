@@ -40,4 +40,4 @@ int main()
 }
 
 // g++ -std=c++17 -I. PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lcups -o pja
-// g++ -std=c++17 -I. PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lwinspool -o print_job_app
+// g++ -std=c++17 -I. PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lwinspool -o pja
