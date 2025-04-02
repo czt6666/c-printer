@@ -13,8 +13,18 @@
 #ifdef _WIN32
 const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
 #elif defined(__linux__) || defined(__APPLE__)
-const std::string SYSTEM_CONVERT_COMMAND = "libreoffice --headless --convert-to pdf";
+const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
 #endif
+
+// #ifdef _WIN32
+// // 假设 soffice 在程序目录的 libreoffice 子目录下
+// const std::string SYSTEM_CONVERT_COMMAND = "\"" + std::filesystem::current_path().string() + "\\libreoffice\\program\\soffice.exe\" --headless --convert-to pdf";
+// #elif defined(__APPLE__)
+// // 内置 libreoffice
+// const std::string SYSTEM_CONVERT_COMMAND = "\"" + std::filesystem::current_path().parent_path().parent_path().string() + "/libreoffice/LibreOffice.app/Contents/MacOS/soffice\" --headless --convert-to pdf";
+// #else
+// const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
+// #endif
 
 const std::vector<std::string> SUPPORTED_FORMATS = {
     ".txt", ".docx", ".doc", ".odt", ".rtf", ".wps", ".md",

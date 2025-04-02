@@ -13,6 +13,7 @@
 #include <cups/cups.h>
 #endif
 
+#ifdef _WIN32
 // 宽字符转换 UTF-8
 std::string WideCharToString(const wchar_t *wstr)
 {
@@ -26,6 +27,7 @@ std::string WideCharToString(const wchar_t *wstr)
     str.resize(size_needed - 1);
     return str;
 }
+#endif
 
 std::vector<std::string> PrinterManager::listAvailablePrinters()
 {

@@ -5,6 +5,10 @@
 *.out
 *.dll
 *.so
+*.dSYM
+
+# 忽略软件包
+libreoffice/
 
 # 忽略 CMake 生成的文件
 CMakeFiles/

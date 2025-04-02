@@ -30,10 +30,10 @@ int main()
     {
         if (printJob.sendToPrinter())
         {
-            // if (printJob.monitorPrintStatus())
-            // {
-            //     std::cout << "Print job completed successfully." << std::endl;
-            // }
+            if (printJob.monitorPrintStatus())
+            {
+                std::cout << "Print job completed successfully." << std::endl;
+            }
         }
     }
     return 0;
