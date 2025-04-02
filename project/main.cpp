@@ -1,9 +1,19 @@
 #include <iostream>
 #include "PrintJob.h"
+#include "FileSelecter.h"
 
 int main()
 {
-    std::string inputFilePath = "../files/test.txt";
+    long long maxFileSize = 1024 * 1024 * 10;
+    // std::string inputFilePath = handleFileSelection(maxFileSize);
+    std::string inputFilePath = "D:\\阿巴阿巴\\调剂.xlsx";
+    if (inputFilePath.empty())
+    {
+        std::cout << "No valid file was selected." << std::endl;
+        return 1;
+    }
+    std::cout << "The selected file path is: " << inputFilePath << std::endl;
+
     PrintJob printJob;
     PrinterManager printerManager;
     auto printers = printerManager.listAvailablePrinters();
@@ -26,18 +36,24 @@ int main()
         return 1;
     }
     std::string selectedPrinter = printers[choice - 1];
-    if (printJob.createPrintJob(inputFilePath, selectedPrinter))
+    if (!printJob.createPrintJob(inputFilePath, selectedPrinter))
     {
-        if (printJob.sendToPrinter())
-        {
-            // if (printJob.monitorPrintStatus())
-            // {
-            //     std::cout << "Print job completed successfully." << std::endl;
-            // }
-        }
+        std::cerr << "Error creating print job." << std::endl;
+        return 1;
     }
+    if (!printJob.sendToPrinter())
+    {
+        std::cerr << "Error sending print job to printer." << std::endl;
+        return 1;
+    }
+    // if (!printJob.monitorPrintStatus())
+    // {
+    //     std::cerr << "Error monitoring print status." << std::endl;
+    //     return 0;
+    // }
+    std::cout << "Print job completed successfully." << std::endl;
     return 0;
 }
 
-// g++ -std=c++17 -I. PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lcups -o pja
-// g++ -std=c++17 -I. PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lwinspool -o pja
+// g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lcups -o pja
+// g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lwinspool -lcomdlg32 -o pja
