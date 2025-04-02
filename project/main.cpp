@@ -2,11 +2,19 @@
 #include "PrintJob.h"
 #include "FileSelecter.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 int main()
 {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
+
     long long maxFileSize = 1024 * 1024 * 10;
-    // std::string inputFilePath = handleFileSelection(maxFileSize);
-    std::string inputFilePath = "D:\\阿巴阿巴\\调剂.xlsx";
+    std::string inputFilePath = handleFileSelection(maxFileSize);
     if (inputFilePath.empty())
     {
         std::cout << "No valid file was selected." << std::endl;
@@ -14,6 +22,7 @@ int main()
     }
     std::cout << "The selected file path is: " << inputFilePath << std::endl;
 
+    // 列出打印机列表
     PrintJob printJob;
     PrinterManager printerManager;
     auto printers = printerManager.listAvailablePrinters();
@@ -35,6 +44,8 @@ int main()
         std::cerr << "Invalid choice." << std::endl;
         return 1;
     }
+
+    // 创建打印任务
     std::string selectedPrinter = printers[choice - 1];
     if (!printJob.createPrintJob(inputFilePath, selectedPrinter))
     {
@@ -46,11 +57,7 @@ int main()
         std::cerr << "Error sending print job to printer." << std::endl;
         return 1;
     }
-    // if (!printJob.monitorPrintStatus())
-    // {
-    //     std::cerr << "Error monitoring print status." << std::endl;
-    //     return 0;
-    // }
+
     std::cout << "Print job completed successfully." << std::endl;
     return 0;
 }

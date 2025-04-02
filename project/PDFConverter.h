@@ -3,8 +3,6 @@
 
 #include <string>
 
-bool executeCommand(const std::string &command);
-
 class PDFConverter
 {
 public:

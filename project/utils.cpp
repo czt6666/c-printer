@@ -77,3 +77,46 @@ std::string generateConvertedFileName(const std::string &inputPath)
     }
     return inputFilePath.stem().string() + "-" + fileHash + ".pdf";
 }
+
+#ifdef _WIN32
+std::string wstring_to_utf8(const std::wstring &wstr)
+{
+    if (wstr.empty())
+        return std::string();
+    int size_needed = WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), NULL, 0, NULL, NULL);
+    if (size_needed <= 0)
+    {
+        std::cerr << "WideCharToMultiByte failed to get size. Error code: " << GetLastError() << std::endl;
+        return "";
+    }
+    std::string strTo(size_needed, 0);
+    int bytes_converted = WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), &strTo[0], size_needed, NULL, NULL);
+    if (bytes_converted <= 0)
+    {
+        std::cerr << "WideCharToMultiByte failed to convert. Error code: " << GetLastError() << std::endl;
+        return "";
+    }
+    return strTo;
+}
+
+std::wstring utf8_to_wstring(const std::string &str)
+{
+    if (str.empty())
+        return std::wstring();
+    int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
+    if (size_needed <= 0)
+    {
+        std::cerr << "MultiByteToWideChar failed to get size. Error code: " << GetLastError() << std::endl;
+        return L"";
+    }
+    std::wstring wstrTo(size_needed, 0);
+    int chars_converted = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &wstrTo[0], size_needed);
+    if (chars_converted <= 0)
+    {
+        std::cerr << "MultiByteToWideChar failed to convert. Error code: " << GetLastError() << std::endl;
+        return L"";
+    }
+    return wstrTo;
+}
+
+#endif

@@ -15,6 +15,7 @@
 const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
 const std::string MOVE_COMMAND = "move";
 const std::string DELETE_COMMAND = "rmdir /s /q";
+// #include <system_error>
 
 #elif defined(__linux__) || defined(__APPLE__)
 const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
@@ -27,7 +28,7 @@ const std::vector<std::string> SUPPORTED_FORMATS = {
     ".pptx", ".ppt", ".odp", ".ppsx", ".pps",
     ".xlsx", ".xls", ".ods",
     ".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff",
-    ".svg",
+    ".svg", ".html", ".htm", ".xml", ".xmls", ".odg",
     ".pdf"};
 
 // 创建临时文件夹
