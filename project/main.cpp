@@ -62,5 +62,5 @@ int main()
     return 0;
 }
 
-// g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lcups -o pja
+// g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lcups `pkg-config --cflags --libs gtk+-3.0` -o pja
 // g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lwinspool -lcomdlg32 -o pja

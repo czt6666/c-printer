@@ -15,12 +15,11 @@
 const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
 const std::string MOVE_COMMAND = "move";
 const std::string DELETE_COMMAND = "rmdir /s /q";
-// #include <system_error>
 
 #elif defined(__linux__) || defined(__APPLE__)
 const std::string SYSTEM_CONVERT_COMMAND = "soffice --headless --convert-to pdf";
-const std::string MOVE_COMMAND "mv";
-const std::string DELETE_COMMAND "rm -r";
+const std::string MOVE_COMMAND = "mv";
+const std::string DELETE_COMMAND = "rm -r";
 #endif
 
 const std::vector<std::string> SUPPORTED_FORMATS = {
@@ -34,7 +33,7 @@ const std::vector<std::string> SUPPORTED_FORMATS = {
 // 创建临时文件夹
 std::filesystem::path createTempPdfDir(const std::filesystem::path &inputFilePath)
 {
-    std::filesystem::path tempPdfDir = inputFilePath.parent_path() / "tempPdfFiles";
+    std::filesystem::path tempPdfDir = inputFilePath.parent_path().parent_path() / "files" / "tempPdfFiles";
     if (!std::filesystem::exists(tempPdfDir))
     {
         std::filesystem::create_directory(tempPdfDir);
@@ -83,7 +82,7 @@ bool PDFConverter::convertToPDF(const std::string &inputPath, std::string &outpu
         printError("Rename and move command execution failed.");
         return false;
     }
-    std::string deleteCommand = DELETE_COMMAND + " /s /q \"" + tempPdfDir.string() + "\"";
+    std::string deleteCommand = DELETE_COMMAND + " \"" + tempPdfDir.string() + "\"";
     if (!executeCommand(deleteCommand))
     {
         printError("Delete temp directory command execution failed.");

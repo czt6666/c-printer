@@ -140,7 +140,7 @@ std::string handleFileSelection(long long maxFileSize)
 // }
 
 // g++ -std=c++17 -I. FileSelecter.cpp -lcomdlg32 -o fs
-// g++ -std=c++17 -I. FileSelecter.cpp -o file_selector `pkg-config --cflags --libs gtk+-3.0`
+// g++ -std=c++17 -I. FileSelecter.cpp -o fs `pkg-config --cflags --libs gtk+-3.0`
 
 // brew install gtk+3
 // sudo apt-get install libgtk-3-dev
