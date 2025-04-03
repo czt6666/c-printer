@@ -64,10 +64,8 @@ public:
         GtkWidget *dialog = gtk_file_chooser_dialog_new("Select File", NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
                                                         "Cancel", GTK_RESPONSE_CANCEL,
                                                         "Open", GTK_RESPONSE_ACCEPT, NULL);
-        gint result = gtk_dialog_run(GTK_DIALOG(dialog));
         std::string filePath;
-
-        if (result == GTK_RESPONSE_ACCEPT)
+        if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
         {
             GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
             char *filename = gtk_file_chooser_get_filename(chooser);
@@ -78,6 +76,8 @@ public:
             }
         }
         gtk_widget_destroy(dialog);
+        while (g_main_context_iteration(NULL, FALSE))
+            ; // 确保 GTK 清理完毕
 
         struct stat fileStat;
         if (!filePath.empty() && stat(filePath.c_str(), &fileStat) == 0 && fileStat.st_size <= maxFileSize)
@@ -88,6 +88,7 @@ public:
         return "";
     }
 };
+
 #endif
 
 // File selector factory class
@@ -107,6 +108,7 @@ public:
 // Handles file selection logic
 std::string handleFileSelection(long long maxFileSize)
 {
+    std::cout << "Select a file (max size: " << maxFileSize / (1024 * 1024) << "MB): ";
     auto selector = FileSelectorFactory::createFileSelector();
     std::string filePath = selector->selectFile(maxFileSize);
 

@@ -60,7 +60,7 @@ bool PDFConverter::convertToPDF(const std::string &inputPath, std::string &outpu
     }
     std::filesystem::path tempPdfDir = createTempPdfDir();
     std::string convertCommand = SYSTEM_CONVERT_COMMAND + " \"" + inputPath + "\" --outdir \"" + tempPdfDir.string() + "\"";
-    if (std::system(convertCommand.c_str()) != 0)
+    if (!executeCommand(convertCommand))
     {
         printError("Conversion command execution failed.");
         return false;
@@ -74,13 +74,13 @@ bool PDFConverter::convertToPDF(const std::string &inputPath, std::string &outpu
     std::filesystem::path defaultOutputPath = tempPdfDir / (inputFilePath.stem().string() + ".pdf");
     std::filesystem::path targetPath = std::filesystem::current_path().parent_path() / "files" / newFileName;
     std::string moveCommand = MOVE_COMMAND + " \"" + defaultOutputPath.string() + "\" \"" + targetPath.string() + "\"";
-    if (std::system(moveCommand.c_str()) != 0)
+    if (!executeCommand(moveCommand))
     {
         printError("Rename and move command execution failed.");
         return false;
     }
     std::string deleteCommand = DELETE_COMMAND + " \"" + tempPdfDir.string() + "\"";
-    if (std::system(deleteCommand.c_str()) != 0)
+    if (!executeCommand(deleteCommand))
     {
         printError("Delete temp directory command execution failed.");
         return false;

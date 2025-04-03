@@ -15,6 +15,7 @@ int main()
 
     long long maxFileSize = 1024 * 1024 * 10;
     std::string inputFilePath = handleFileSelection(maxFileSize);
+    // std::string inputFilePath = "/Users/v_changzhitao/Desktop/test.docx";
     if (inputFilePath.empty())
     {
         std::cout << "No valid file was selected." << std::endl;
@@ -62,5 +63,12 @@ int main()
     return 0;
 }
 
-// g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lcups `pkg-config --cflags --libs gtk+-3.0` -o pja
-// g++ -std=c++17 -I. Utils.cpp FileSelecter.cpp PrinterManager.cpp PDFConverter.cpp PrintJob.cpp main.cpp -lwinspool -lcomdlg32 -o pja
+/*
+mac:
+g++ -std=c++17 -Iinclude src/Utils.cpp src/FileSelecter.cpp src/PrinterManager.cpp src/PDFConverter.cpp src/PrintJob.cpp src/main.cpp -lcups `pkg-config --cflags --libs gtk+-3.0` -o bin/pja
+
+
+windows:
+g++ -std=c++17 -Iinclude src/Utils.cpp src/FileSelecter.cpp src/PrinterManager.cpp src/PDFConverter.cpp src/PrintJob.cpp src/main.cpp -lwinspool -lcomdlg32 -o bin/pja
+
+*/
