@@ -18,14 +18,14 @@ set(INC_DIR include)
 file(GLOB SRCS "${SRC_DIR}/*.cpp" "${UTIL_DIR}/*.cpp")
 
 # 生成可执行文件
-add_executable(prienterJopApp ${SRCS})
+add_executable(printjob ${SRCS})
 
 # 设置头文件搜索路径
-target_include_directories(prienterJopApp PRIVATE ${INC_DIR} ${GTK3_INCLUDE_DIRS})
+target_include_directories(printjob PRIVATE ${INC_DIR} ${GTK3_INCLUDE_DIRS})
 
 # 链接 GTK+ 和其他库
 if(UNIX)
-    target_link_libraries(prienterJopApp PRIVATE ${GTK3_LIBRARIES} cups)
+    target_link_libraries(printjob PRIVATE ${GTK3_LIBRARIES} cups)
 elseif(WIN32)
-    target_link_libraries(prienterJopApp PRIVATE winspool comdlg32)
+    target_link_libraries(printjob PRIVATE winspool comdlg32)
 endif

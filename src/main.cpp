@@ -1,6 +1,6 @@
 #include <iostream>
 #include "PrintJob.h"
-#include "FileSelecter.h"
+#include "FileSelector.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -64,10 +64,10 @@ int main()
 
 /*
 mac:
-g++ -std=c++17 -Iinclude src/Utils.cpp src/FileSelecter.cpp src/PrinterManager.cpp src/PDFConverter.cpp src/PrintJob.cpp src/main.cpp -lcups `pkg-config --cflags --libs gtk+-3.0` -o bin/prienterJopApp
+g++ -std=c++17 -Iinclude src/Utils.cpp src/FileSelector.cpp src/PrinterManager.cpp src/PDFConverter.cpp src/PrintJob.cpp src/main.cpp -lcups `pkg-config --cflags --libs gtk+-3.0` -o bin/printjob
 
 
 windows:
-g++ -std=c++17 -Iinclude src/Utils.cpp src/FileSelecter.cpp src/PrinterManager.cpp src/PDFConverter.cpp src/PrintJob.cpp src/main.cpp -lwinspool -lcomdlg32 -o bin/prienterJopApp
+g++ -std=c++17 -Iinclude src/Utils.cpp src/FileSelector.cpp src/PrinterManager.cpp src/PDFConverter.cpp src/PrintJob.cpp src/main.cpp -lwinspool -lcomdlg32 -o bin/printjob
 
 */

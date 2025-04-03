@@ -1,5 +1,5 @@
-#ifndef FILESELECTER_H
-#define FILESELECTER_H
+#ifndef FILESELECTOR_H
+#define FILESELECTOR_H
 
 #include <string>
 

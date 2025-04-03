@@ -28,7 +28,10 @@ const std::vector<std::string> SUPPORTED_FORMATS = {
     ".xlsx", ".xls", ".ods",
     ".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff",
     ".svg", ".html", ".htm", ".xml", ".xmls", ".odg",
-    ".pdf"};
+    ".pdf",
+    ".ott", ".otp", ".ots", ".otg",
+    ".emf", ".wmf",
+    ".csv", ".tsv"};
 
 // 创建临时文件夹
 std::filesystem::path createTempPdfDir()
