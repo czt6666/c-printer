@@ -3,7 +3,7 @@ CXX := g++
 CXXFLAGS := -std=c++17 -Iinclude -Wall -Wextra
 
 # 目标可执行文件
-TARGET := bin/pja
+TARGET := bin/prienterJopApp
 
 # 目标操作系统（Linux/macOS 或 Windows）
 OS := $(shell uname)
