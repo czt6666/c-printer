@@ -31,13 +31,10 @@ const std::vector<std::string> SUPPORTED_FORMATS = {
     ".pdf"};
 
 // 创建临时文件夹
-std::filesystem::path createTempPdfDir(const std::filesystem::path &inputFilePath)
+std::filesystem::path createTempPdfDir()
 {
-    std::filesystem::path tempPdfDir = inputFilePath.parent_path().parent_path() / "files" / "tempPdfFiles";
-    if (!std::filesystem::exists(tempPdfDir))
-    {
-        std::filesystem::create_directory(tempPdfDir);
-    }
+    std::filesystem::path tempPdfDir = std::filesystem::current_path().parent_path() / "files" / "tempPdfFiles";
+    std::filesystem::create_directories(tempPdfDir);
     return tempPdfDir;
 }
 
@@ -61,9 +58,9 @@ bool PDFConverter::convertToPDF(const std::string &inputPath, std::string &outpu
         printError("Unsupported file format: " + extension);
         return false;
     }
-    std::filesystem::path tempPdfDir = createTempPdfDir(inputFilePath);
+    std::filesystem::path tempPdfDir = createTempPdfDir();
     std::string convertCommand = SYSTEM_CONVERT_COMMAND + " \"" + inputPath + "\" --outdir \"" + tempPdfDir.string() + "\"";
-    if (!executeCommand(convertCommand))
+    if (std::system(convertCommand.c_str()) != 0)
     {
         printError("Conversion command execution failed.");
         return false;
@@ -75,15 +72,15 @@ bool PDFConverter::convertToPDF(const std::string &inputPath, std::string &outpu
         return false;
     }
     std::filesystem::path defaultOutputPath = tempPdfDir / (inputFilePath.stem().string() + ".pdf");
-    std::filesystem::path targetPath = inputFilePath.parent_path().parent_path() / "files" / newFileName;
+    std::filesystem::path targetPath = std::filesystem::current_path().parent_path() / "files" / newFileName;
     std::string moveCommand = MOVE_COMMAND + " \"" + defaultOutputPath.string() + "\" \"" + targetPath.string() + "\"";
-    if (!executeCommand(moveCommand))
+    if (std::system(moveCommand.c_str()) != 0)
     {
         printError("Rename and move command execution failed.");
         return false;
     }
     std::string deleteCommand = DELETE_COMMAND + " \"" + tempPdfDir.string() + "\"";
-    if (!executeCommand(deleteCommand))
+    if (std::system(deleteCommand.c_str()) != 0)
     {
         printError("Delete temp directory command execution failed.");
         return false;
