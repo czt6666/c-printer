@@ -14,7 +14,6 @@ libreoffice/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 out/
 
 # 忽略 VSCode 相关的配置
